@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Deathsection Cluster — PvE Mod List</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#050810;
+      --fg:#E8EDF7;
+      --muted:#8791a7;
+      --accent:#ff2f6a;
+      --accent-soft:#ff6c3a;
+      --accent-sec:#4bd5ff;
+      --accent-ter:#9b6bff;
+      --card:#0d1020;
+      --duration:220ms;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at 0 0,#34105a 0,transparent 52%),
+        radial-gradient(circle at 100% 0,#67102b 0,transparent 48%),
+        radial-gradient(circle at 100% 100%,#0c3c5f 0,transparent 50%),
+        linear-gradient(160deg,#050810,#050810 40%,#050814 100%);
+      color:var(--fg);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .shell{max-width:1240px;margin:0 auto;padding:0 22px 80px}
+
+    header{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(180deg,rgba(3,7,14,0.96),rgba(3,7,14,0.88));
+      border-bottom:1px solid rgba(132,150,255,0.2);
+    }
+    .nav{
+      max-width:1240px;margin:0 auto;
+      display:flex;align-items:center;gap:24px;
+      padding:10px 22px;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-logo{
+      width:42px;height:42px;border-radius:16px;
+      background:
+        conic-gradient(from 180deg,var(--accent),#ffb14f,var(--accent-sec),var(--accent-ter),var(--accent));
+      position:relative;overflow:hidden;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.2),0 12px 40px rgba(0,0,0,0.9);
+    }
+    .brand-logo-inner{
+      position:absolute;inset:3px;border-radius:14px;
+      background:radial-gradient(circle at 20% 0,#2b1238 0,#050713 50%,#02030a 100%);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .mascot-img{
+      width:100%;height:100%;object-fit:cover;
+      filter:drop-shadow(0 0 16px rgba(255,255,255,0.6));
+    }
+    .brand-title{display:flex;flex-direction:column}
+    .brand-title span:first-child{
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;font-size:14px;letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .brand-title span:last-child{
+      font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.26em;
+    }
+    nav{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .nav-link{
+      padding:6px 10px;border-radius:999px;font-size:12px;
+      color:var(--muted);text-transform:uppercase;letter-spacing:.16em;
+      transition:all var(--duration) ease-out;
+    }
+    .nav-link:hover{
+      color:#f9fbff;
+      background:rgba(42,55,110,0.7);
+      box-shadow:0 0 0 1px rgba(123,150,255,0.3);
+    }
+    .nav-cta{
+      display:flex;align-items:center;gap:8px;
+      padding:8px 16px;border-radius:999px;
+      background:radial-gradient(circle at 0 0,#ffb14f 0,transparent 54%),
+                 linear-gradient(90deg,var(--accent),var(--accent-soft));
+      color:#0b0510;
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;font-size:11px;
+      text-transform:uppercase;letter-spacing:.2em;
+      border:none;
+      box-shadow:0 10px 32px rgba(255,47,106,0.6);
+    }
+    .nav-cta-dot{
+      width:7px;height:7px;border-radius:999px;
+      background:#0b0510;box-shadow:0 0 0 4px rgba(0,0,0,0.5);
+    }
+
+    h1,h2,h3{font-family:"Montserrat",sans-serif}
+    .page-hero{
+      margin-top:26px;margin-bottom:26px;
+      padding:22px 20px;
+      border-radius:26px;
+      background:
+        radial-gradient(circle at 0 0,rgba(255,255,255,0.08) 0,transparent 55%),
+        radial-gradient(circle at 100% 0,rgba(75,213,255,0.18) 0,transparent 55%),
+        linear-gradient(135deg,#050713,#04030f);
+      border:1px solid rgba(130,155,255,0.7);
+      box-shadow:0 26px 100px rgba(0,0,0,0.9);
+    }
+    .page-hero h1{
+      font-weight:900;font-size:24px;letter-spacing:.16em;text-transform:uppercase;
+    }
+    .page-hero h1 span{
+      background:linear-gradient(90deg,#fefefe,#ffdee9,#ffe29f);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+    .page-hero p{
+      margin-top:8px;font-size:13px;color:var(--muted);max-width:640px;
+    }
+
+    .section{margin-bottom:26px}
+    .section-title{
+      font-size:13px;text-transform:uppercase;letter-spacing:.18em;
+      color:#f4f5ff;margin-bottom:6px;
+    }
+    .section-sub{font-size:12px;color:var(--muted);margin-bottom:10px;max-width:640px}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    @media(max-width:960px){.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:720px){.grid-3{grid-template-columns:1fr}}
+
+    .card{
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 0 0,rgba(255,255,255,0.06) 0,transparent 55%),
+        linear-gradient(150deg,rgba(7,9,30,0.98),rgba(5,5,18,0.98));
+      border:1px solid rgba(116,139,255,0.7);
+      box-shadow:0 18px 60px rgba(0,0,0,0.9);
+      padding:10px 10px 12px;
+      position:relative;overflow:hidden;
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .mod-image{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:12px;
+      object-fit:cover;
+      background:#050713;
+    }
+    .card-label{
+      font-size:10px;text-transform:uppercase;letter-spacing:.18em;
+      color:#9fb1ff;margin-top:4px;
+    }
+    .card h2{
+      font-size:14px;font-weight:700;
+      margin-top:2px;
+    }
+    .card p{
+      font-size:11px;color:var(--muted);
+    }
+    .mod-link{
+      margin-top:4px;
+      font-size:11px;
+      color:var(--accent-sec);
+      text-decoration:underline;
+      word-break:break-all;
+    }
+
+    footer{
+      margin-top:30px;padding-top:16px;
+      border-top:1px solid rgba(120,140,255,0.4);
+      font-size:11px;color:var(--muted);
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+	@media (max-width: 720px) {
+  /* Center header content on mobile */
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  .brand {
+    justify-content: center;
+  }
+  nav {
+    margin-left: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Center hero section */
+  .page-hero {
+    text-align: center;
+  }
+  .page-hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tag-row {
+    justify-content: center;
+  }
+
+  /* Center section headings */
+  .section-title,
+  .section-sub {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center cards content (but keep full width) */
+  .card {
+    text-align: center;
+  }
+  .pill-row {
+    justify-content: center;
+  }
+  .card-meta {
+    text-align: center;
+  }
+
+  /* Footer centered */
+  footer {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-logo">
+        <div class="brand-logo-inner">
+          <img src="assets/mascot.png" alt="Deathsection Mascot" class="mascot-img">
+        </div>
+      </div>
+      <div class="brand-title">
+        <span>Deathsection Cluster</span>
+        <span>PvE Mod List</span>
+      </div>
+    </div>
+    <nav>
+      <a class="nav-link" href="index.html#hero">Home</a>
+      <a class="nav-link" href="pve.html">PvE</a>
+	  <a class="nav-link" href="pvp.html">PvP</a>
+      <a class="nav-link" href="overhaul.html">Overhauls</a>
+      <a class="nav-link" href="https://deathsection.tip4serv.com/" target="_blank" rel="noopener">Shop</a>
+    </nav>
+    <a class="nav-cta" href="https://discord.gg/deathsection" target="_blank" rel="noopener">
+      <span class="nav-cta-dot"></span> Join Discord
+    </a>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="page-hero">
+    <h1><span>PvE Mod Collection</span></h1>
+    <p>
+      All mods currently used on the Deathsection PvE Cluster.
+      Click any mod name to open its CurseForge page. Make sure these are installed/enabled before joining.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-title">PvE Mods</div>
+    <p class="section-sub">
+      Focused on quality of life, building, automation, and expanded PvE creature variety.
+    </p>
+
+    <div class="grid-3">
+
+      <!-- Browser Button & QR Code -->
+      <article class="card">
+        <img src="assets/638573235550652264.jpg" alt="Browser Button & QR Code" class="mod-image">
+        <div class="card-label">Utility</div>
+        <h2>Browser Button &amp; QR Code</h2>
+        <p>Lets players quickly open your website / Discord from in‑game via a button and QR code overlay.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/tip4serv" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Inventory Backup Saver -->
+      <article class="card">
+        <img src="assets/638385177518176255.png" alt="Inventory Backup Saver" class="mod-image">
+        <div class="card-label">Safety</div>
+        <h2>Inventory Backup Saver</h2>
+        <p>Automatically backs up player inventories so admins can restore items after legitimate losses or crashes.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/inventory-backup-saver" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Any Colour Sets -->
+      <article class="card">
+        <img src="assets/638342078866287294.png" alt="Any Colour Sets" class="mod-image">
+        <div class="card-label">Cosmetic</div>
+        <h2>Any Colour Sets {Crossplay}</h2>
+        <p>Expands dyeable color options for dinos and structures so players can fully customize bases and lines.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/any-colour-sets" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- ARKomatic -->
+      <article class="card">
+        <img src="assets/638357174956440109.png" alt="ARKomatic" class="mod-image">
+        <div class="card-label">Automation</div>
+        <h2>ARKomatic</h2>
+        <p>Adds automation tools and QoL structures for crafting, pulling resources, and managing large PvE bases.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/arkomatic" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Auto Engrams -->
+      <article class="card">
+        <img src="assets/638388822972370605.png" alt="Auto Engrams" class="mod-image">
+        <div class="card-label">Progression</div>
+        <h2>Auto Engrams!</h2>
+        <p>Automatically unlocks appropriate engrams as you level, removing tedious manual unlocking and respecs.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/auto-engrams" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Awesome Spyglass -->
+      <article class="card">
+        <img src="assets/638374185412464094.png" alt="Awesome Spyglass" class="mod-image">
+        <div class="card-label">Info</div>
+        <h2>Awesome Spyglass!</h2>
+        <p>Enhanced spyglass with live dino stats, buffs, and tribe markers — great for PvE taming and boss prep.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/awesomespyglass" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- ASA Api Utils -->
+      <article class="card">
+        <img src="assets/638393863821735942.png" alt="ASA Api Utils" class="mod-image">
+        <div class="card-label">Backend</div>
+        <h2>ASA Api Utils</h2>
+        <p>Shared backend utility library required by several other mods to function correctly and efficiently.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/asa-api-utils" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Easy Transferable Element -->
+      <article class="card">
+        <img src="assets/638510599153920633.png" alt="Easy Transferable Element" class="mod-image">
+        <div class="card-label">Economy</div>
+        <h2>Easy Transferable Element</h2>
+        <p>Makes element easier to move, store and trade between players and maps in a PvE‑friendly way.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/easy-transferable-element" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- MX-E Ark Shop UI -->
+      <article class="card">
+        <img src="assets/638364435696605086.png" alt="MX-E Ark Shop UI" class="mod-image">
+        <div class="card-label">Shop</div>
+        <h2>MX-E Ark Shop UI</h2>
+        <p>Modern in‑game shop UI for points, kits, and purchases, integrated with the PvE cluster economy.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/mx-e-ark-shop-ui" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Lily's Tweaker -->
+      <article class="card">
+        <img src="assets/638358736622601156.png" alt="Lily's Tweaker" class="mod-image">
+        <div class="card-label">Balance</div>
+        <h2>Lily's Tweaker</h2>
+        <p>Server‑side tweaks used to fine‑tune PvE balance, rates, and behaviors across all maps.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/lilys-tweaker" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Mouse Saver -->
+      <article class="card">
+        <img src="assets/638858735897608505.png" alt="Mouse Saver" class="mod-image">
+        <div class="card-label">QoL</div>
+        <h2>Mouse Saver</h2>
+        <p>Reduces repetitive clicking by simplifying dino attacks and actions — great for long PvE sessions.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/mouse-saver-easy-dino-attacks" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Web Logo -->
+      <article class="card">
+        <img src="assets/638343394947225429.png" alt="Web Logo" class="mod-image">
+        <div class="card-label">Branding</div>
+        <h2>Web Logo</h2>
+        <p>Displays the cluster logo in‑game for better branding and a more “official” PvE experience.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/web-logo" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Spawn Blocker -->
+      <article class="card">
+        <img src="assets/638348485562160361.png" alt="Spawn Blocker" class="mod-image">
+        <div class="card-label">Spawns</div>
+        <h2>Spawn Blocker</h2>
+        <p>Blocks or replaces specified spawns to remove problematic creatures/items from the PvE ecosystem.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/spawn-blocker" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Twemoji Pack -->
+      <article class="card">
+        <img src="assets/638386947993609933.png" alt="Twemoji Pack" class="mod-image">
+        <div class="card-label">Cosmetic</div>
+        <h2>Twemoji Pack</h2>
+        <p>Adds modern emoji visuals to in‑game chat, improving expression and RP / community communication.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/twemoji-pack" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- BigAl's WAK Spinosaurus -->
+      <article class="card">
+        <img src="assets/638949185863203619.png" alt="BigAl's WAK Spinosaurus" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>BigAl's WAK Spinosaurus</h2>
+        <p>Reworked Spino variant with updated visuals and behavior for more interesting river and swamp PvE.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/bigals-wak-spinosaurus" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Solo Farm Mod -->
+      <article class="card">
+        <img src="assets/638354964349458497.png" alt="Solo Farm Mod" class="mod-image">
+        <div class="card-label">QoL</div>
+        <h2>Solo Farm Mod</h2>
+        <p>Makes gathering and hauling resources much easier for solo and small‑tribe players in PvE.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/solo-farm-mod" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- B+ Spawn Editor -->
+      <article class="card">
+        <img src="assets/638904224213001180.png" alt="B+ Spawn Editor" class="mod-image">
+        <div class="card-label">Spawns</div>
+        <h2>B+ Spawn Editor</h2>
+        <p>Admin spawn editor that lets you precisely control what creatures appear where in your PvE world.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/b-spawn-editor" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Cyber Structures -->
+      <article class="card">
+        <img src="assets/639171341039507508.png" alt="Cyber Structures" class="mod-image">
+        <div class="card-label">Building</div>
+        <h2>Cyber Structures</h2>
+        <p>Futuristic structure set for building high‑tech PvE bases and sci‑fi themed projects.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/cybers-structures" target="_blank">View on CurseForge</a>
+      </article>
+
+          <!-- Automated Ark -->
+      <article class="card">
+        <img src="assets/638340875221384467.png" alt="Automated Ark" class="mod-image">
+        <div class="card-label">Automation</div>
+        <h2>Automated Ark</h2>
+        <p>Large automation suite for feeding, crafting, sorting and base management — reduces grind and frees players for PvE goals.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/automated-ark" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Paleo ARK - Apex Predators -->
+      <article class="card">
+        <img src="assets/638998257118799821.png" alt="Paleo ARK Apex Predators" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Paleo ARK - Apex Predators</h2>
+        <p>Adds paleo‑styled apex predators and high‑threat creatures to enrich PvE encounters and boss variety.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/paleo-ark-evolution-apex-predators" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Paleo ARK - Dangerous Depths -->
+      <article class="card">
+        <img src="assets/638998256150802477.png" alt="Paleo ARK Dangerous Depths" class="mod-image">
+        <div class="card-label">Aquatic</div>
+        <h2>Paleo ARK - Dangerous Depths</h2>
+        <p>Expands underwater fauna with paleo‑inspired sea creatures, making ocean exploration riskier and more rewarding.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/paleo-ark-evolution-dangerous-depths" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Dino Depot -->
+      <article class="card">
+        <img src="assets/638363777480918040.png" alt="Dino Depot" class="mod-image">
+        <div class="card-label">Utility</div>
+        <h2>Dino Depot</h2>
+        <p>Organizational tools for dinos and pens — displays, quick access and storage helpers for taming and base shows.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/dino-depot" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Draconic Chronicles -->
+      <article class="card">
+        <img src="assets/638341915728613762.png" alt="Draconic Chronicles" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Draconic Chronicles</h2>
+        <p>Introduces dragons and draconic creatures for high‑fantasy PvE taming, with new loot and event possibilities.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/draconic-chronicles" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Moro's Gigantophis -->
+      <article class="card">
+        <img src="assets/638919954063860619.png" alt="Moro's Gigantophis" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Moro's Gigantophis</h2>
+        <p>Massive serpent tame with unique mechanics — fun late‑game PvE mount and boss encounter addition.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/moros-gigantophis" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Moro's Indomitable Duo -->
+      <article class="card">
+        <img src="assets/638973674909556374.png" alt="Moro's Indomitable Duo" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Moro's Indomitable Duo</h2>
+        <p>Two powerful custom creatures that expand end‑game PvE options for group bossing and exploration.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/moros-indomitable-duo" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Prehistoric Beasts -->
+      <article class="card">
+        <img src="assets/638352534440150031.png" alt="Prehistoric Beasts" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Prehistoric Beasts</h2>
+        <p>Adds a variety of scientifically inspired prehistoric animals to diversify the ecosystem and taming options.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/prehistoric-beasts" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Paleo Hard Hitting Herbivores -->
+      <article class="card">
+        <img src="assets/639123291743513536.png" alt="Paleo Hard Hitting Herbivores" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Paleo ARK - Hard Hitting Herbivores</h2>
+        <p>Introduces powerful herbivores that provide alternative late‑game taming and tanking strategies for PvE.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/paleo-ark-evolution-hard-hitting-herbivores" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Shiny! Dinos Ascended -->
+      <article class="card">
+        <img src="assets/638340791557646005.png" alt="Shiny! Dinos Ascended" class="mod-image">
+        <div class="card-label">Collectors</div>
+        <h2>Shiny! Dinos Ascended</h2>
+        <p>Spawns rare shiny variants of creatures with unique coloration and occasional stat bonuses for collectors.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/shiny-ascended" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Colossuscorpius -->
+      <article class="card">
+        <img src="assets/638383547765162769.png" alt="Colossuscorpius" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Colossuscorpius</h2>
+        <p>Giant scorpion creature adding a new combat/tanking option and late‑game PvE variety.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/colossuscorpius" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- [T.A.C] Bastion Beetle -->
+      <article class="card">
+        <img src="assets/639083454734183164.png" alt="[T.A.C] Bastion Beetle" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>[T.A.C] Bastion Beetle</h2>
+        <p>Heavily armored beetle mount that acts as a mobile tank and support platform for PvE teams.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/t-a-c-bastion-beetle" target="_blank">View on CurseForge</a>
+      </article>
+
+      <!-- Isle of Myths: Skyshroud Drakara -->
+      <article class="card">
+        <img src="assets/639060925450350648.png" alt="Skyshroud Drakara" class="mod-image">
+        <div class="card-label">Creatures</div>
+        <h2>Isle of Myths: Skyshroud Drakara</h2>
+        <p>Mythic flying draconic creature with exploration and combat abilities tailored for PvE adventuring.</p>
+        <a class="mod-link" href="https://www.curseforge.com/ark-survival-ascended/mods/isle-of-myths-drakara" target="_blank">View on CurseForge</a>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
+

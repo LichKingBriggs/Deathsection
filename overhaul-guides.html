@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Deathsection Cluster — Overhaul Guides</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Deathsection Cluster — curated guides and resources for Ark Omega, Ark Descended, Ark Primal Chaos and Ark Supreme."/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#050810;
+      --fg:#E8EDF7;
+      --muted:#8791a7;
+      --accent:#ff2f6a;
+      --accent-soft:#ff6c3a;
+      --accent-sec:#4bd5ff;
+      --accent-ter:#9b6bff;
+      --card:#0d1020;
+      --duration:220ms;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:#050810;
+      color:var(--fg);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    /* animated background + mascot (MATCH OVERHAUL PAGE) */
+    .bg-anim{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      background:radial-gradient(circle at 0 0,#3d0e62 0,transparent 55%),
+                 radial-gradient(circle at 100% 0,#6b1435 0,transparent 50%),
+                 radial-gradient(circle at 100% 100%,#0a3c5f 0,transparent 55%),
+                 linear-gradient(160deg,#050810,#050814);
+      overflow:hidden;
+    }
+    .bg-orbit{
+      position:absolute;
+      width:600px;height:600px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.16),transparent 70%);
+      opacity:0.22;
+      mix-blend-mode:screen;
+      filter:blur(1px);
+      animation:orbit 32s linear infinite;
+    }
+    .bg-orbit:nth-child(1){top:-200px;left:-220px;animation-duration:40s;}
+    .bg-orbit:nth-child(2){bottom:-260px;right:-260px;animation-duration:30s;}
+    .bg-orbit:nth-child(3){top:20%;right:-320px;animation-duration:45s;}
+    @keyframes orbit{
+      0%{transform:translate3d(0,0,0) rotate(0deg);}
+      50%{transform:translate3d(80px,-40px,0) rotate(180deg);}
+      100%{transform:translate3d(0,0,0) rotate(360deg);}
+    }
+
+    .mascot-bg{
+      position:fixed;
+      right:-120px;
+      bottom:-80px;
+      width:520px;
+      height:auto;
+      opacity:0.16;
+      z-index:-2;
+      transform-origin:center;
+      animation:floatMascot 22s ease-in-out infinite alternate;
+      pointer-events:none;
+      filter:drop-shadow(0 0 30px rgba(255,255,255,0.4));
+    }
+    @keyframes floatMascot{
+      0%{transform:translate3d(0,0,0) scale(1);}
+      50%{transform:translate3d(-30px,-18px,0) scale(1.05);}
+      100%{transform:translate3d(0,-10px,0) scale(1.02);}
+    }
+    @media(max-width:900px){
+      .mascot-bg{opacity:0.1;width:360px;right:-80px;bottom:-40px;}
+    }
+
+    .shell{max-width:1240px;margin:0 auto;padding:0 22px 80px}
+
+    header{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(180deg,rgba(5,8,16,0.96),rgba(5,8,16,0.9));
+      border-bottom:1px solid rgba(132,150,255,0.2);
+    }
+    .nav{
+      max-width:1240px;margin:0 auto;
+      display:flex;align-items:center;gap:24px;
+      padding:10px 22px;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-logo{
+      width:48px;height:48px;border-radius:18px;
+      background:
+        conic-gradient(from 180deg,var(--accent),#ffb14f,var(--accent-sec),var(--accent-ter),var(--accent));
+      position:relative;overflow:hidden;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.25),0 14px 44px rgba(0,0,0,0.9);
+    }
+    .brand-logo-inner{
+      position:absolute;inset:4px;border-radius:14px;
+      background:radial-gradient(circle at 20% 0,#2b1238 0,#050713 55%,#02030a 100%);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .mascot-img{
+      width:100%;height:100%;object-fit:cover;
+      filter:drop-shadow(0 0 18px rgba(255,255,255,0.7));
+    }
+    .brand-title{display:flex;flex-direction:column}
+    .brand-title span:first-child{
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;font-size:14px;letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .brand-title span:last-child{
+      font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.26em;
+    }
+
+    nav{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .nav-link{
+      padding:7px 14px;border-radius:999px;font-size:12px;
+      color:var(--muted);text-transform:uppercase;letter-spacing:.16em;
+      background:rgba(9,13,33,0.6);
+      border:1px solid transparent;
+      transition:all var(--duration) ease-out;
+    }
+    .nav-link:hover{
+      color:#f9fbff;
+      background:rgba(42,55,110,0.8);
+      border-color:rgba(123,150,255,0.5);
+      box-shadow:0 0 18px rgba(50,90,255,0.5);
+    }
+    .nav-cta{
+      display:flex;align-items:center;gap:8px;
+      padding:8px 18px;border-radius:999px;
+      background:radial-gradient(circle at 0 0,#ffb14f 0,transparent 54%),
+                 linear-gradient(90deg,var(--accent),var(--accent-soft));
+      color:#0b0510;
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;font-size:11px;
+      text-transform:uppercase;letter-spacing:.2em;
+      border:none;
+      box-shadow:0 10px 32px rgba(255,47,106,0.6);
+    }
+    .nav-cta-dot{
+      width:7px;height:7px;border-radius:999px;
+      background:#0b0510;box-shadow:0 0 0 4px rgba(0,0,0,0.5);
+    }
+
+    h1,h2,h3{font-family:"Montserrat",sans-serif}
+
+    .page-hero{
+      margin-top:26px;margin-bottom:26px;
+      padding:22px 20px;
+      border-radius:26px;
+      background:
+        radial-gradient(circle at 0 0,rgba(255,255,255,0.08) 0,transparent 55%),
+        radial-gradient(circle at 100% 0,rgba(75,213,255,0.18) 0,transparent 55%),
+        linear-gradient(135deg,#050713,#04030f);
+      border:1px solid rgba(130,155,255,0.7);
+      box-shadow:0 26px 100px rgba(0,0,0,0.9);
+    }
+    .page-hero h1{
+      font-weight:900;font-size:24px;letter-spacing:.16em;text-transform:uppercase;
+    }
+    .page-hero h1 span{
+      background:linear-gradient(90deg,#fefefe,#ffdee9,#ffe29f);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+    .page-hero p{
+      margin-top:8px;font-size:13px;color:var(--muted);max-width:640px;
+    }
+
+    .section{margin-bottom:28px}
+    .section-title{
+      font-size:13px;text-transform:uppercase;letter-spacing:.18em;
+      color:#f4f5ff;margin-bottom:6px;
+    }
+    .section-sub{font-size:12px;color:var(--muted);margin-bottom:10px;max-width:640px}
+
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+
+    .card{
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 0 0,rgba(255,255,255,0.06) 0,transparent 55%),
+        linear-gradient(150deg,rgba(7,9,30,0.98),rgba(5,5,18,0.98));
+      border:1px solid rgba(116,139,255,0.7);
+      box-shadow:0 18px 60px rgba(0,0,0,0.9);
+      padding:14px 14px 16px;
+      position:relative;overflow:hidden;
+      display:flex;flex-direction:column;gap:6px;
+    }
+
+    /* image + content layout inside cards */
+    .card-inner{
+      display:grid;
+      grid-template-columns:120px minmax(0,1fr);
+      gap:12px;
+      align-items:flex-start;
+    }
+    .card-media{
+      border-radius:14px;
+      overflow:hidden;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,0.12),transparent 55%);
+      border:1px solid rgba(150,175,255,0.65);
+      box-shadow:0 10px 34px rgba(0,0,0,0.9);
+    }
+    .card-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .card-content h2{
+      font-size:15px;font-weight:700;margin-top:2px;
+    }
+    .card-label{
+      font-size:10px;text-transform:uppercase;letter-spacing:.18em;
+      color:#9fb1ff;margin-top:4px;
+    }
+    .card-content p{
+      font-size:12px;color:var(--muted);margin-top:4px;
+    }
+    .guide-link{
+      margin-top:6px;
+      font-size:11px;
+      color:var(--accent-sec);
+      text-decoration:underline;
+      word-break:break-all;
+      display:inline-block;
+    }
+    @media(max-width:640px){
+      .card-inner{
+        grid-template-columns:1fr;
+      }
+    }
+
+    /* Quick links list */
+    .quick-links{
+      margin-bottom:26px;
+      padding:16px 16px 18px;
+      border-radius:18px;
+      background:linear-gradient(145deg,rgba(9,13,40,0.96),rgba(5,7,22,0.98));
+      border:1px solid rgba(110,140,255,0.65);
+      box-shadow:0 18px 60px rgba(0,0,0,0.9);
+      font-size:12px;
+    }
+    .quick-links-title{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:#f4f5ff;
+      margin-bottom:6px;
+      font-family:"Montserrat",sans-serif;
+    }
+    .quick-links-sub{
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:10px;
+      max-width:680px;
+    }
+    .quick-links ul{
+      list-style:none;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:6px 18px;
+    }
+    .quick-links li a{
+      color:var(--accent-sec);
+      text-decoration:underline;
+      word-break:break-all;
+    }
+
+    footer{
+      margin-top:30px;padding-top:16px;
+      border-top:1px solid rgba(120,140,255,0.4);
+      font-size:11px;color:var(--muted);
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+	@media (max-width: 720px) {
+  /* Center header content on mobile */
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  .brand {
+    justify-content: center;
+  }
+  nav {
+    margin-left: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Center hero section */
+  .page-hero {
+    text-align: center;
+  }
+  .page-hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tag-row {
+    justify-content: center;
+  }
+
+  /* Center section headings */
+  .section-title,
+  .section-sub {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center cards content (but keep full width) */
+  .card {
+    text-align: center;
+  }
+  .pill-row {
+    justify-content: center;
+  }
+  .card-meta {
+    text-align: center;
+  }
+
+  /* Footer centered */
+  footer {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+<div class="bg-anim">
+  <div class="bg-orbit"></div>
+  <div class="bg-orbit"></div>
+  <div class="bg-orbit"></div>
+</div>
+<img src="assets/mascot.png" alt="Deathsection Mascot" class="mascot-bg">
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-logo">
+        <div class="brand-logo-inner">
+          <img src="assets/mascot.png" alt="Deathsection Mascot" class="mascot-img">
+        </div>
+      </div>
+      <div class="brand-title">
+        <span>Deathsection Cluster</span>
+        <span>Overhaul Guides</span>
+      </div>
+    </div>
+    <nav>
+      <a class="nav-link" href="index.html#hero">Home</a>
+      <a class="nav-link" href="pve.html">PvE</a>
+      <a class="nav-link" href="pvp.html">PvP</a>
+      <a class="nav-link" href="overhaul.html">Overhauls</a>
+      <a class="nav-link" href="https://deathsection.tip4serv.com/" target="_blank" rel="noopener">Shop</a>
+    </nav>
+    <a class="nav-cta" href="https://discord.gg/deathsection" target="_blank" rel="noopener">
+      <span class="nav-cta-dot"></span> Join Discord
+    </a>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="page-hero">
+    <h1><span>Overhaul Guides Hub</span></h1>
+    <p>
+      All the external resources we recommend for learning Deathsection’s overhaul servers — Omega, Descended, Primal Chaos,
+      and Supreme. Use these to understand tiers, bosses, crafting systems, and progression paths.
+    </p>
+  </section>
+
+    <div class="grid-2">
+      <!-- OmegaDex -->
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-media">
+            <img src="assets/638508233258474070.png" alt="Ark Omega OmegaDex overview">
+          </div>
+          <div class="card-content">
+            <div class="card-label">Official Site</div>
+            <h2>OmegaDex</h2>
+            <p>
+              Full creature, tier, ability and item guide for Ark Omega. Use this to look up what each tier does, how abilities interact,
+              and what you should be hunting next.
+            </p>
+            <a class="guide-link" href="https://www.omegadex.info/" target="_blank" rel="noopener">Open OmegaDex</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Primal Chaos Doc -->
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-media">
+            <img src="assets/638346421942194935.png" alt="Ark Omega Google Docs guide">
+          </div>
+          <div class="card-content">
+            <div class="card-label">Docs</div>
+            <h2>Primal Guide </h2>
+            <p>
+             Community guide that explains core concepts of Ark Primal Chaos and related overhaul content: elemental tiers, chaos
+              variants, progression routes, and recommended early‑game goals.
+            </p>
+            <a class="guide-link" href="https://docs.google.com/document/d/1LaEyl_p0AiFPnOOLr0Abq8-H_4-Se5qSMIR-NfRUtic/edit?tab=t.0#heading=h.3edwvbfol28j"
+               target="_blank" rel="noopener">Open Primal Chaos Guide</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+    <div class="grid-2">
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-media">
+            <img src="assets/638409762999360505.png" alt="Primal Chaos and Descended guide">
+          </div>
+          <div class="card-content">
+            <div class="card-label">Docs</div>
+            <h2>Descended Guide</h2>
+            <p>
+              Community guide that explains core concepts of Ark Primal Chaos and related overhaul content: elemental tiers, chaos
+              variants, progression routes, and recommended early‑game goals.
+            </p>
+            <a class="guide-link" href="https://docs.google.com/document/d/1zJBntQPCL2Y5-GALDcXOqoj5M9C2k9lAd6IJk7WINxk/edit?tab=t.0#heading=h.y2xrcpynkq01"
+               target="_blank" rel="noopener">Open Descended Guide</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+    <div class="grid-2">
+      <article class="card">
+        <div class="card-inner">
+          <div class="card-media">
+            <img src="assets/639093591455143545.png" alt="Ark Supreme guide overview">
+          </div>
+          <div class="card-content">
+            <div class="card-label">Docs</div>
+            <h2>Ark Supreme Guide</h2>
+            <p>
+              Detailed overview of Ark Supreme’s design, including creature tiers, itemization, boss order and general progression
+              tips. Required reading before jumping into Supreme.
+            </p>
+            <a class="guide-link" href="https://rokiarknet.github.io/ark-supreme.html" target="_blank" rel="noopener">Open Ark Supreme Guide</a>
+          </div
