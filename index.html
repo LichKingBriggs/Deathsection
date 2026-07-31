@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Deathsection Cluster — Ark Ascended</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Deathsection Cluster — Ark Ascended PvP & PvE servers, raid bases, boss events, elite dinos, shiny hunting, and overhaul PvE challenges."/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#050810;
+      --fg:#E8EDF7;
+      --muted:#8791a7;
+      --accent:#ff2f6a;
+      --accent-soft:#ff6c3a;
+      --accent-sec:#4bd5ff;
+      --accent-ter:#9b6bff;
+      --card:#0d1020;
+      --duration:220ms;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:#050810;
+      color:var(--fg);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    /* animated background + mascot */
+    .bg-anim{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      background:radial-gradient(circle at 0 0,#3d0e62 0,transparent 55%),
+                 radial-gradient(circle at 100% 0,#6b1435 0,transparent 50%),
+                 radial-gradient(circle at 100% 100%,#0a3c5f 0,transparent 55%),
+                 linear-gradient(160deg,#050810,#050814);
+      overflow:hidden;
+    }
+    .bg-orbit{
+      position:absolute;
+      width:600px;height:600px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.16),transparent 70%);
+      opacity:0.22;
+      mix-blend-mode:screen;
+      filter:blur(1px);
+      animation:orbit 32s linear infinite;
+    }
+    .bg-orbit:nth-child(1){top:-200px;left:-220px;animation-duration:40s;}
+    .bg-orbit:nth-child(2){bottom:-260px;right:-260px;animation-duration:30s;}
+    .bg-orbit:nth-child(3){top:20%;right:-320px;animation-duration:45s;}
+    @keyframes orbit{
+      0%{transform:translate3d(0,0,0) rotate(0deg);}
+      50%{transform:translate3d(80px,-40px,0) rotate(180deg);}
+      100%{transform:translate3d(0,0,0) rotate(360deg);}
+    }
+
+    .mascot-bg{
+      position:fixed;
+      right:-120px;
+      bottom:-80px;
+      width:520px;
+      height:auto;
+      opacity:0.16;
+      z-index:-2;
+      transform-origin:center;
+      animation:floatMascot 22s ease-in-out infinite alternate;
+      pointer-events:none;
+      filter:drop-shadow(0 0 30px rgba(255,255,255,0.4));
+    }
+    @keyframes floatMascot{
+      0%{transform:translate3d(0,0,0) scale(1);}
+      50%{transform:translate3d(-30px,-18px,0) scale(1.05);}
+      100%{transform:translate3d(0,-10px,0) scale(1.02);}
+    }
+    @media(max-width:900px){
+      .mascot-bg{opacity:0.1;width:360px;right:-80px;bottom:-40px;}
+    }
+
+    .shell{max-width:1240px;margin:0 auto;padding:0 22px 80px}
+
+    header{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(180deg,rgba(5,8,16,0.96),rgba(5,8,16,0.9));
+      border-bottom:1px solid rgba(132,150,255,0.2);
+    }
+    .nav{
+      max-width:1240px;margin:0 auto;
+      display:flex;align-items:center;gap:24px;
+      padding:10px 22px;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-logo{
+      width:48px;height:48px;border-radius:18px;
+      background:
+        conic-gradient(from 180deg,var(--accent),#ffb14f,var(--accent-sec),var(--accent-ter),var(--accent));
+      position:relative;overflow:hidden;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.25),0 14px 44px rgba(0,0,0,0.9);
+    }
+    .brand-logo-inner{
+      position:absolute;inset:4px;border-radius:14px;
+      background:radial-gradient(circle at 20% 0,#2b1238 0,#050713 55%,#02030a 100%);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .mascot-img{
+      width:100%;height:100%;object-fit:cover;
+      filter:drop-shadow(0 0 18px rgba(255,255,255,0.7));
+    }
+    .brand-title{display:flex;flex-direction:column}
+    .brand-title span:first-child{
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;font-size:14px;letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .brand-title span:last-child{
+      font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.26em;
+    }
+
+    nav{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .nav-link{
+      padding:7px 14px;border-radius:999px;font-size:12px;
+      color:var(--muted);text-transform:uppercase;letter-spacing:.16em;
+      background:rgba(9,13,33,0.6);
+      border:1px solid transparent;
+      transition:all var(--duration) ease-out;
+    }
+    .nav-link:hover{
+      color:#f9fbff;
+      background:rgba(42,55,110,0.8);
+      border-color:rgba(123,150,255,0.5);
+      box-shadow:0 0 18px rgba(50,90,255,0.5);
+    }
+    .nav-cta{
+      display:flex;align-items:center;gap:8px;
+      padding:8px 18px;border-radius:999px;
+      background:radial-gradient(circle at 0 0,#ffb14f 0,transparent 54%),
+                 linear-gradient(90deg,var(--accent),var(--accent-soft));
+      color:#0b0510;
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;font-size:11px;
+      text-transform:uppercase;letter-spacing:.2em;
+      border:none;
+      box-shadow:0 10px 32px rgba(255,47,106,0.6);
+    }
+    .nav-cta-dot{
+      width:7px;height:7px;border-radius:999px;
+      background:#0b0510;box-shadow:0 0 0 4px rgba(0,0,0,0.5);
+    }
+
+    h1,h2,h3{font-family:"Montserrat",sans-serif}
+
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+      gap:32px;
+      align-items:center;
+      margin-top:32px;
+      margin-bottom:40px;
+    }
+    @media(max-width:960px){.hero{grid-template-columns:1fr;}}
+
+    .hero-copy h1{
+      font-weight:900;font-size:30px;letter-spacing:.18em;text-transform:uppercase;
+    }
+    .hero-copy h1 span{
+      background:linear-gradient(90deg,#fefefe,#ffdee9,#ffe29f);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+    .hero-copy p{
+      margin-top:10px;font-size:14px;color:var(--muted);max-width:520px;
+    }
+    .hero-pill-row{
+      margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;
+    }
+    .hero-pill{
+      padding:5px 11px;border-radius:999px;
+      font-size:11px;text-transform:uppercase;letter-spacing:.16em;
+      background:rgba(11,10,28,0.96);
+      border:1px solid rgba(186,203,255,0.7);
+      color:#dbe3ff;
+    }
+    .hero-cta-row{
+      margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;
+    }
+    .hero-main-btn{
+      padding:9px 18px;border-radius:999px;
+      border:none;
+      background:linear-gradient(90deg,var(--accent),var(--accent-soft));
+      color:#0b0510;
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;font-size:11px;
+      text-transform:uppercase;letter-spacing:.18em;
+      box-shadow:0 10px 30px rgba(255,47,106,0.7);
+      transition:transform var(--duration) ease,box-shadow var(--duration) ease;
+    }
+    .hero-main-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 40px rgba(255,47,106,0.9);
+    }
+    .hero-secondary-btn{
+      padding:9px 16px;border-radius:999px;
+      border:1px solid rgba(143,160,255,0.7);
+      background:rgba(8,10,28,0.9);
+      color:#dbe3ff;
+      font-size:11px;text-transform:uppercase;letter-spacing:.16em;
+      transition:transform var(--duration) ease,box-shadow var(--duration) ease,border-color var(--duration) ease;
+    }
+    .hero-secondary-btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(186,203,255,1);
+      box-shadow:0 12px 32px rgba(75,213,255,0.7);
+    }
+
+    .hero-card{
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 0 0,rgba(255,255,255,0.09) 0,transparent 55%),
+        radial-gradient(circle at 100% 100%,rgba(75,213,255,0.16) 0,transparent 55%),
+        linear-gradient(145deg,#050713,#05030f);
+      border:1px solid rgba(130,155,255,0.8);
+      box-shadow:0 26px 90px rgba(0,0,0,0.95);
+      padding:18px 18px 20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card-tag{
+      font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:#9fb1ff;
+      margin-bottom:6px;
+    }
+    .hero-card h2{
+      font-size:16px;font-weight:700;margin-bottom:6px;
+    }
+    .hero-card p{
+      font-size:12px;color:var(--muted);margin-bottom:10px;
+    }
+    .hero-server-stats{
+      font-size:11px;color:var(--muted);margin-top:6px;
+    }
+
+    .section{
+      margin-bottom:40px;
+    }
+    .section-title{
+      font-size:13px;text-transform:uppercase;letter-spacing:.18em;
+      color:#f4f5ff;margin-bottom:6px;
+    }
+    .section-sub{font-size:12px;color:var(--muted);margin-bottom:10px;max-width:640px}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    @media(max-width:960px){.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:720px){.grid-3{grid-template-columns:1fr}}
+
+    .card{
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 0 0,rgba(255,255,255,0.06) 0,transparent 55%),
+        linear-gradient(150deg,rgba(7,9,30,0.98),rgba(5,5,18,0.98));
+      border:1px solid rgba(116,139,255,0.7);
+      box-shadow:0 18px 60px rgba(0,0,0,0.9);
+      padding:14px 14px 16px;
+      position:relative;overflow:hidden;
+      transition:transform var(--duration) ease,box-shadow var(--duration) ease,border-color var(--duration) ease;
+    }
+    .card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(206,214,255,0.9);
+      box-shadow:0 22px 70px rgba(25,40,100,0.95);
+    }
+    .card-header{margin-bottom:6px}
+    .card-label{
+      font-size:10px;text-transform:uppercase;letter-spacing:.18em;
+      color:#9fb1ff;margin-bottom:3px;
+    }
+    .card h2{font-size:15px;font-weight:700}
+    .card-body{margin-top:6px;font-size:12px;color:var(--muted)}
+
+    .pill-row{
+      margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;
+    }
+    .pill{
+      padding:4px 9px;border-radius:999px;
+      font-size:10px;text-transform:uppercase;letter-spacing:.14em;
+      background:rgba(9,10,30,0.95);
+      border:1px solid rgba(150,170,255,0.7);
+      color:#d5ddff;
+    }
+
+    .btn-soft{
+      margin-top:10px;
+      display:inline-block;
+      padding:7px 12px;border-radius:999px;
+      border:1px solid rgba(143,160,255,0.85);
+      font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#dee4ff;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,0.1) 0,transparent 50%),
+                 linear-gradient(120deg,rgba(11,15,45,0.96),rgba(8,9,26,0.96));
+      transition:transform var(--duration) ease,box-shadow var(--duration) ease;
+    }
+    .btn-soft:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 36px rgba(60,90,255,0.9);
+    }
+
+    footer{
+      margin-top:40px;padding-top:16px;
+      border-top:1px solid rgba(120,140,255,0.4);
+      font-size:11px;color:var(--muted);
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+	@media (max-width: 720px) {
+  /* Center header content on mobile */
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  .brand {
+    justify-content: center;
+  }
+  nav {
+    margin-left: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Center hero section */
+  .page-hero {
+    text-align: center;
+  }
+  .page-hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tag-row {
+    justify-content: center;
+  }
+
+  /* Center section headings */
+  .section-title,
+  .section-sub {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center cards content (but keep full width) */
+  .card {
+    text-align: center;
+  }
+  .pill-row {
+    justify-content: center;
+  }
+  .card-meta {
+    text-align: center;
+  }
+
+  /* Footer centered */
+  footer {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+<div class="bg-anim">
+  <div class="bg-orbit"></div>
+  <div class="bg-orbit"></div>
+  <div class="bg-orbit"></div>
+</div>
+<img src="assets/mascot.png" alt="Deathsection Mascot" class="mascot-bg">
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-logo">
+        <div class="brand-logo-inner">
+          <img src="assets/mascot.png" alt="Deathsection Mascot" class="mascot-img">
+        </div>
+      </div>
+      <div class="brand-title">
+        <span>Deathsection Cluster</span>
+        <span>Ark Ascended</span>
+      </div>
+    </div>
+ <nav>
+   <a class="nav-link" href="index.html#hero">Home</a>
+      <a class="nav-link" href="pve.html">PvE</a>
+	  <a class="nav-link" href="pvp.html">PvP</a>
+      <a class="nav-link" href="overhaul.html">Overhauls</a>
+      <a class="nav-link" href="https://deathsection.tip4serv.com/" target="_blank" rel="noopener">Shop</a>
+</nav>
+
+    <a class="nav-cta" href="https://discord.gg/deathsection" target="_blank" rel="noopener">
+      <span class="nav-cta-dot"></span> Join Discord
+    </a>
+  </div>
+</header>
+
+<main class="shell" id="hero">
+  <section class="hero">
+    <div class="hero-copy">
+      <h1><span>Survive. Build. Ascend.</span></h1>
+      <p>
+        Deathsection is a curated Ark Ascended cluster with dedicated PvP and PvE networks, active staff, custom drops,
+        and a full in‑game shop. Choose high‑octane raids or chilled progression — all on the same brand‑new hardware.
+      </p>
+      <div class="hero-pill-row">
+        <div class="hero-pill">Raid Bases &amp; Boss Events</div>
+        <div class="hero-pill">Shiny &amp; Elite Dinos</div>
+        <div class="hero-pill">Overhaul PvE Challenges</div>
+      </div>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <div class="hero-card-tag">Cluster Snapshot</div>
+      <h2>Why Join Deathsection?</h2>
+      <p>
+        • <strong>PvP</strong>: Raid bases spawning across maps, boss‑style events, bounties on rival players, and elite dino hunts.<br>
+        • <strong>PvE</strong>: Relaxed shiny hunting, big base building, breeding projects, and casual progression.<br>
+        • <strong>Challenge</strong>: Overhaul mods and custom tweaks for those who want a harder, more rewarding PvE run.
+      </p>
+      <div class="hero-server-stats">
+        Use the PvP and PvE pages for live player counts, BattleMetrics charts, and full stat breakdowns.
+      </div>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Pick Your Path</div>
+    <p class="section-sub">Three distinct playstyles on one cluster — swap anytime without losing the Deathsection experience.</p>
+
+    <div class="grid-3">
+      <article class="card">
+        <div class="card-header">
+          <div class="card-label">PvP Experience</div>
+          <h2>Raid, Hunt &amp; Dominate</h2>
+        </div>
+        <div class="card-body">
+          <div class="pill-row">
+            <span class="pill">Auto Raid Bases</span>
+            <span class="pill">Boss Events</span>
+            <span class="pill">Player Bounties</span>
+            <span class="pill">Elite Dinos</span>
+          </div>
+          <p style="margin-top:8px;">
+            Jump into ORP PvP with automated raid bases spawning around the map, rotating boss‑style events, and a bounty system that
+            rewards you for hunting high‑value targets. Track and tame elite variants to flex your tribe’s power.
+          </p>
+        </div>
+		<br>
+        <a class="hero-main-btn" href="pvp.html">Enter PvP Cluster</a>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <div class="card-label">PvE Experience</div>
+          <h2>Chill, Build &amp; Collect</h2>
+        </div>
+        <div class="card-body">
+          <div class="pill-row">
+            <span class="pill">Shiny Dinos</span>
+            <span class="pill">Mega Builds</span>
+            <span class="pill">Breeding</span>
+            <span class="pill">Casual Bossing</span>
+          </div>
+          <p style="margin-top:8px;">
+            Prefer to build and tame in peace? Our PvE cluster lets you focus on shiny dino hunting, massive base builds, long‑term
+            breeding lines, and relaxed boss fights with friends — no raids, no wipes hovering over your head.
+          </p>
+        </div>
+		<br>
+       <a class="hero-main-btn" href="pve.html" style="background:linear-gradient(90deg,#4bd5ff,#9b6bff);box-shadow:0 10px 30px rgba(75,213,255,0.7);">Enter PvE Cluster</a>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <div class="card-label">Hard Mode PvE</div>
+          <h2>Overhaul &amp; Challenge</h2>
+        </div>
+        <div class="card-body">
+          <div class="pill-row">
+            <span class="pill">Overhaul Mods</span>
+            <span class="pill">Tougher Creatures</span>
+            <span class="pill">Risk vs Reward</span>
+          </div>
+                   <p style="margin-top:8px;">
+            Want more of a challenge? Our overhaul PvE setups crank up difficulty with tougher creatures, tweaked spawns,
+            and higher stakes — perfect for veterans who want every tame and boss kill to feel earned.
+          </p>
+        </div>
+		<br>
+        <a class="hero-main-btn" href="overhaul.html">Deathsection Overhauls</a>
+      </article>
+    </div>
+	  <article class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-label">Join</div>
+            <h2>How to Join</h2>
+          </div>
+        </div>
+        <div class="card-body">
+          Connect instructions, recommended settings, and Discord support for PvE builders, traders, and boss teams.
+        </div>
+		<br>
+        <a class="nav-cta" href="joinserver.html" >How To Join The Cluster</a>
+      </article>
+  </section>
+</main>
+
+<footer class="shell">
+  <div>JOIN NOW &amp; START YOUR ASCENSION — <strong>discord.gg/deathsection</strong></div>
+  <div>© Deathsection Cluster</div>
+</footer>
+</body>
+</html>
+
